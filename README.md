@@ -74,8 +74,37 @@ make build-swe-agent
 Finally you need to setup the `microservice`, which ties together the
 `OpenDevin` frontend and the `SWE-agent` agent.
 
+First you need to create a `.env` file in the `microservice` directory
+like the following:
+
+```bash
+OPENAI_API_KEY=<OPENAI_API_KEY_GOES_HERE>
+ANTHROPIC_API_KEY=<ANTHROPIC_API_KEY_GOES_HERE>
+SWE_AGENT_PATH=<SWE_AGENT_PATH_GOES_HERE>
+PYTHON_PATH=<PATH_TO_SWE_AGENT_PYTHON_BINARY_GOES_HERE>
+
+DOCKER_HOST_VOLUME_PATH=<PATH_TO_DOCKER_VOLUME_DIRECTORY_GOES_HERE>
+DOCKER_CONTAINER_VOLUME_PATH=/usr/app
+
+SWE_AGENT_PER_INSTANCE_COST_LIMIT=<MAX_USD_PER_AGENT_TASK>
+SWE_AGENT_TIMEOUT=25
+SWE_AGENT_MODEL_NAME=gpt4
+```
+
+Then, run the following command to build the microservice:
+
 ```bash
 make build-microservice
+```
+
+Finally, within the `microservice` directory, create a new
+directory called `docker_volume` which will be used to contain
+the agents Docker container will store files within.
+
+```bash
+cd ./microservice
+mkdir docker_volume
+cd ..
 ```
 
 ### Usage
@@ -84,7 +113,12 @@ To run Anterior, you need to run the frontend and the backend.
 Run the following command to run both together:
 
 ```bash
-(make run-frontend) & (make run-backend)
+./run.sh
+```
+
+You may have to change permissions for the file first:
+```bash
+chmod +x run.sh
 ```
 
 If that isn't working for some reason, run both of them separately:
