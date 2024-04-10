@@ -1,0 +1,47 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          package_json_file: frontend/package.json
+
+      - name: Install Node.js 20
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: 'frontend/pnpm-lock.yaml'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: |
+          cd frontend
+          pnpm run lint
+
+  lint-python:
+    name: Lint python
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+      - name: Install dependencies
+        run: pip install ruff mypy
+      - name: Run ruff
+        run: ruff check --config dev_config/python/ruff.toml opendevin/ agenthub/
+      - name: Run mypy
+        run: mypy --install-types --non-interactive --config-file dev_config/python/mypy.ini opendevin/ agenthub/
