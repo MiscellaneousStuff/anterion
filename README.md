@@ -1,3 +1,12 @@
+<div align="center">
+    <a href="https://www.youtube.com/watch?v=J-KZNFVcAxU"
+       target="_blank">
+       <img src="http://img.youtube.com/vi/J-KZNFVcAxU/0.jpg"
+            alt="Example PPO implementation in League of Legends"
+            width="240" height="180" border="10" />
+    </a>
+</div>
+
 [![](https://dcbadge.vercel.app/api/server/nbY6njCuxh)](https://discord.gg/nbY6njCuxh)
 
 # 🤖 Anterion Agent
