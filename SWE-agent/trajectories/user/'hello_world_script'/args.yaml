@@ -557,7 +557,7 @@ environment:
   timeout: 25
   verbose: true
 instance_filter: .*
-issue: '''write me a hello world script'''
+issue: '''write a hello world script in py'''
 run_name: '''hello_world_script'''
 skip_existing: true
 suffix: ''

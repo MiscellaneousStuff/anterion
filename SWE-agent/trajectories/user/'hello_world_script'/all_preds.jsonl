@@ -1,1 +1,2 @@
 {"model_name_or_path": "'hello_world_script'", "instance_id": "'write-me-a-hello-world-script'", "model_patch": null}
+{"model_name_or_path": "'hello_world_script'", "instance_id": "'write-a-hello-world-script-in-py'", "model_patch": null}
