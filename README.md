@@ -126,6 +126,13 @@ cd ..
 
 ### Usage
 
+To now run Anterion, you'll first need to re-activate it's
+conda environment using:
+
+```bash
+conda activate anterion
+```
+
 To run Anterion, you need to run the frontend and the backend.
 Run the following command to run both together:
 
