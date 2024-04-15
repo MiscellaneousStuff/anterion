@@ -223,6 +223,9 @@ class SWEEnv(gym.Env):
         #         error_msg="Failed to clean repository",
         #     )
 
+        # if persistence_var is present, then skip init steps
+        # if not present, perform init steps
+        
         # Reset environment variables
         for cmd in [
             'export CURRENT_FILE=""',
@@ -236,6 +239,11 @@ class SWEEnv(gym.Env):
                 error_msg="Failed to reset environment variables",
             )
 
+        container_path = os.environ["DOCKER_CONTAINER_VOLUME_PATH"]
+        initialised_exists = self.communicate(f'[ -e {container_path}/INITIALISED ] && echo "true" || echo "false"')
+        if initialised_exists.strip().lower() == "true":
+            return None, info
+        
         # Set up environment
         self.communicate_with_handling(
             "source /root/miniconda3/etc/profile.d/conda.sh",
@@ -251,15 +259,16 @@ class SWEEnv(gym.Env):
                 timeout_duration=LONG_TIMEOUT,
                 )
 
-        # Call install environment helper function if specified
-        if self.install_environment:
-            if self.is_from_github_url:
-                logger.warning((
-                    "install_environment is set to True, but the data path is a GitHub URL. "
-                    "Skipping conda environment installation."
-                    ))
-            else:
-                self.install_env()
+        # # Call install environment helper function if specified
+        # if self.install_environment:
+        #     if self.is_from_github_url:
+        #         logger.warning((
+        #             "install_environment is set to True, but the data path is a GitHub URL. "
+        #             "Skipping conda environment installation."
+        #             ))
+        #     else:
+        #         self.install_env()
+
         # Install mypy for linting purposes
         self.communicate_with_handling(
             f"pip install flake8",
@@ -299,6 +308,11 @@ class SWEEnv(gym.Env):
         # Print required netlify env vars
         # self.communicate("echo $NETLIFY_AUTH_TOKEN")
         # self.communicate("echo $NETLIFY_SITE_ID")
+
+        self.communicate_with_handling(
+            input=f"touch {container_path}/INITIALISED",
+            error_msg="Failed to set the environment as having been initialised"
+        )
 
         # Write any metadata to info if necessary
         return None, info
@@ -460,6 +474,11 @@ class SWEEnv(gym.Env):
         """
         Initialize custom commands within container
         """
+        container_path = os.environ["DOCKER_CONTAINER_VOLUME_PATH"]
+        initialised_exists = self.communicate(f'[ -e {container_path}/INITIALISED ] && echo "true" || echo "false"')
+        if initialised_exists.strip().lower() == "true":
+            return
+
         self.communicate_with_handling(
             "source /root/.bashrc",
             error_msg="Failed to source .bashrc",
