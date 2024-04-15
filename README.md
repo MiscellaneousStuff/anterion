@@ -35,10 +35,12 @@ You will need to setup all three components of the system before being able to r
 
 ### 1. `OpenDevin` Setup
 
-Before setting up OpenDevin, make a new conda environment by doing the following:
+Before setting up OpenDevin, make a new conda environment and activate
+it by doing the following:
 
 ```bash
 conda create --name anterion python=3.11
+conda activate anterion
 ```
 
 To setup OpenDevin, run the following command:
