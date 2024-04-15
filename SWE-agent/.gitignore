@@ -186,7 +186,7 @@ website/frontend/build
 *.demo.yaml
 
 # trajectory files
-trajectories/*
+# trajectories/*
 
 # Local Netlify folder
 .netlify
