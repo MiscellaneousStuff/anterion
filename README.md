@@ -118,7 +118,7 @@ cd ..
 
 ### Usage
 
-To run Anterior, you need to run the frontend and the backend.
+To run Anterion, you need to run the frontend and the backend.
 Run the following command to run both together:
 
 ```bash
