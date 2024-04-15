@@ -43,7 +43,7 @@ conda create --name anterion python=3.11
 conda activate anterion
 ```
 
-To setup OpenDevin, run the following command:
+To setup OpenDevin, run the following command in the `anterion` directory:
 
 ```bash
 make build-open-devin
@@ -80,7 +80,7 @@ NETLIFY_AUTH_TOKEN="<NETLIFY_AUTH_TOKEN_GOES_HERE>"
 NETLIFY_SITE_ID="<NETLIFY_SITE_ID_GOES_HERE>"
 ```
 
-Finally, run the following command to setup `SWE-agent`
+Run the following command inside of the `anterion` directory to setup `SWE-agent`
 
 ```bash
 make build-swe-agent
@@ -91,7 +91,17 @@ make build-swe-agent
 Finally you need to setup the `microservice`, which ties together the
 `OpenDevin` frontend and the `SWE-agent` agent.
 
-First you need to create a `.env` file in the `microservice` directory
+First, within the `microservice` directory, create a new
+directory called `docker_volume` which will be used to contain
+the agents Docker container will store files within.
+
+```bash
+cd ./microservice
+mkdir docker_volume
+cd ..
+```
+
+Then you need to create a `.env` file in the `microservice` directory
 like the following:
 
 ```bash
@@ -108,32 +118,30 @@ SWE_AGENT_TIMEOUT=25
 SWE_AGENT_MODEL_NAME=gpt4
 ```
 
-Then, run the following command to build the microservice:
-
-```bash
-make build-microservice
-```
-
-Finally, within the `microservice` directory, create a new
-directory called `docker_volume` which will be used to contain
-the agents Docker container will store files within.
-
-```bash
-cd ./microservice
-mkdir docker_volume
-cd ..
-```
-
-### Usage
-
-To now run Anterion, you'll first need to re-activate it's
-conda environment using:
+Next, reactivate the conda environment using:
 
 ```bash
 conda activate anterion
 ```
 
-To run Anterion, you need to run the frontend and the backend.
+
+Finally, run the following command to build the microservice:
+
+```bash
+make build-microservice
+```
+
+
+
+### Usage
+
+To now run Anterion, you need to be in the `anterion` environment using:
+
+```bash
+conda activate anterion
+```
+
+Then you need to run the frontend and the backend.
 Run the following command to run both together:
 
 ```bash
