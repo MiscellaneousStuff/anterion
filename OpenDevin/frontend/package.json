@@ -40,7 +40,7 @@
     "test": "jest",
     "preview": "vite preview",
     "lint": "eslint src/**/*.ts* && prettier --check src/**/*.ts*",
-    "prepare": ""
+    "prepare": "cd ../.. && husky install OpenDevin/frontend/.husky"
   },
   "husky": {
     "hooks": {
