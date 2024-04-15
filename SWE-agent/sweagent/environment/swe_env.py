@@ -17,6 +17,7 @@ from simple_parsing.helpers import FrozenSerializable
 from sweagent.environment.utils import (
     copy_file_to_container,
     get_container,
+    get_custom_container,
     get_instances,
     is_from_github_url,
     read_with_timeout,
@@ -392,12 +393,15 @@ class SWEEnv(gym.Env):
         except:
             pass
         self.container.terminate()
+        print(">>> self.persistent:", self.persistent)
         if self.persistent:
             if self.container_obj.status not in {"paused", "exited"}:
                 self.container_obj.pause()
                 self.logger.info("Agent container paused")
+                print(">>> agent container paused")
             else:
                 self.logger.info(f"Agent container status: {self.container_obj.status}")
+                print(f">>> agent container status: {self.container_obj.status}")
         else:
             try:
                 self.container_obj.remove(force=True)
@@ -436,7 +440,7 @@ class SWEEnv(gym.Env):
             unique_string = current_time + process_id
             hash_object = hashlib.sha256(unique_string.encode())
             self.container_name = f"{self.image_name}-{hash_object.hexdigest()[:10]}"
-        self.container, self.parent_pids = get_container(
+        self.container, self.parent_pids = get_custom_container(
             self.container_name, self.image_name,
             host_path=self.host_path,
             container_path=self.container_path,

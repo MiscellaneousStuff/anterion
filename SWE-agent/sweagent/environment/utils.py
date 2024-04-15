@@ -192,8 +192,10 @@ def _get_non_persistent_container(ctr_name: str, image_name: str, host_path: str
         pass
     return container, {"1", }  # bash PID is always 1 for non-persistent containers
 
-def _get_persistent_container(ctr_name: str, image_name: str, persistent: bool = False) -> Tuple[subprocess.Popen, set]:
+def _get_persistent_container(ctr_name: str, image_name: str, host_path: str, container_path: str, persistent: bool = False) -> Tuple[subprocess.Popen, set]:
     """Original Persistent Container Function"""
+    volume_arg = f"{host_path}:{container_path}"
+
     client = docker.from_env()
     containers = client.containers.list(all=True, filters={"name": ctr_name})
     if ctr_name in [c.name for c in containers]:
@@ -217,6 +219,7 @@ def _get_persistent_container(ctr_name: str, image_name: str, persistent: bool =
             tty=True,
             detach=True,
             auto_remove=not persistent,
+            volumes={host_path: {'bind': container_path, 'mode': 'rw'}}
         )
         container_obj.start()
     startup_cmd =  [
@@ -228,6 +231,7 @@ def _get_persistent_container(ctr_name: str, image_name: str, persistent: bool =
         "-l",
         "-m",
     ]
+    print("STARTUP_CMD:", startup_cmd)
     container = subprocess.Popen(
         startup_cmd,
         stdin=PIPE,
@@ -272,6 +276,19 @@ def get_container(ctr_name: str, image_name: str, host_path: str, container_path
         return _get_persistent_container(ctr_name, image_name)
     else:
         return _get_non_persistent_container(ctr_name, image_name, host_path, container_path)
+
+def get_custom_container(ctr_name: str, image_name: str, host_path: str, container_path: str, persistent: bool = False) -> subprocess.Popen:
+    """
+    Get a container object for a given container name and image name
+
+    Arguments:
+        ctr_name (str): Name of container
+        image_name (str): Name of image
+        persistent (bool): Whether to use a persistent container or not
+    Returns:
+        Container object
+    """
+    return _get_persistent_container(ctr_name, image_name, host_path, container_path)
 
 
 def get_commit(api: GhApi, owner: str, repo: str, base_commit: str = None):

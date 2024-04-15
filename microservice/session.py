@@ -135,6 +135,7 @@ class Session:
         # 2. Initialise SWE-agent to start resolving user issue
         host_path = os.environ["DOCKER_HOST_VOLUME_PATH"]
         container_path = os.environ["DOCKER_CONTAINER_VOLUME_PATH"]
+        container_name = "test"
 
         org_args = \
             f"""{os.environ['PYTHON_PATH']} run.py
@@ -145,7 +146,8 @@ class Session:
             --run_name '{issue_as_run_name}'
             --timeout {os.environ["SWE_AGENT_TIMEOUT"]}
             --host_path {host_path}
-            --container_path {container_path}""".split("\n")
+            --container_path {container_path}
+            --container_name {container_name}""".split("\n")
         org_args = " ".join([ln.strip() for ln in org_args])
 
         args = org_args.split(" ")
