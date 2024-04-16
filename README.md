@@ -2,8 +2,8 @@
     <a href="https://www.youtube.com/watch?v=J-KZNFVcAxU"
        target="_blank">
        <img src="http://img.youtube.com/vi/J-KZNFVcAxU/0.jpg"
-            alt="Example PPO implementation in League of Legends"
-            width="240" height="180" border="10" />
+            alt="Anterion AI Agent Demo"
+            width="480" height="360" border="10" />
     </a>
 </div>
 
@@ -19,6 +19,17 @@ Anterion extends the capabilities of `SWE-agent` to plan and execute open-ended 
 `OpenDevin`.
 
 We've equiped Anterion with easy deployment and UI to allow you to fix bugs and prototype ideas at ease.
+
+## 🎥 Install Tutorial (Windows/WSL)
+
+<div align="center">
+    <a href="https://www.youtube.com/watch?v=-Hee201JQxk"
+       target="_blank">
+       <img src="http://img.youtube.com/vi/-Hee201JQxk/0.jpg"
+            alt="Anterion AI Install Tutorial (Windows/WSL)"
+            width="480" height="360" border="10" />
+    </a>
+</div>
 
 ## 🏁 Getting Started
 
