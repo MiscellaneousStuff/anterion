@@ -3,7 +3,7 @@
        target="_blank">
        <img src="http://img.youtube.com/vi/J-KZNFVcAxU/0.jpg"
             alt="Anterion AI Agent Demo"
-            width="480" height="360" border="10" />
+            width="240" height="180" border="10" />
     </a>
 </div>
 
@@ -27,7 +27,7 @@ We've equiped Anterion with easy deployment and UI to allow you to fix bugs and 
        target="_blank">
        <img src="http://img.youtube.com/vi/-Hee201JQxk/0.jpg"
             alt="Anterion AI Install Tutorial (Windows/WSL)"
-            width="480" height="360" border="10" />
+            width="240" height="180" border="10" />
     </a>
 </div>
 
