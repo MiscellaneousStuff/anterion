@@ -60,7 +60,6 @@ command:
 cd SWE-agent
 conda env create -f environment.yml
 conda activate swe-agent
-cd ..
 ```
 
 You will need to create a file called `keys.cfg` inside of the `SWE-agent`
@@ -72,7 +71,7 @@ ANTHROPIC_API_KEY: '<ANTHROPIC_API_KEY_GOES_HERE>'
 GITHUB_TOKEN: '<GITHUB_PERSONAL_ACCESS_TOKEN_GOES_HERE>'
 ```
 
-(Optionally) If you want to be able to use Netlify deployments, add the following
+And add the following
 `.env` file inside of the `SWE-agent` directory:
 
 ```bash
@@ -80,25 +79,26 @@ NETLIFY_AUTH_TOKEN="<NETLIFY_AUTH_TOKEN_GOES_HERE>"
 NETLIFY_SITE_ID="<NETLIFY_SITE_ID_GOES_HERE>"
 ```
 
-Run the following command inside of the `anterion` directory to setup `SWE-agent`
+Netlify deployments are optional. If you do not want to use them or don't have netlify installed, you can leave both fields as empty strings.
+
+From the `SWE-agent` directory head back to the `anterion` directory and run the following command to setup `SWE-agent`
 
 ```bash
+cd ..
 make build-swe-agent
 ```
 
 ### 3. `microservice` Setup
 
-Finally you need to setup the `microservice`, which ties together the
+Finally, you need to setup the `microservice`, which ties together the
 `OpenDevin` frontend and the `SWE-agent` agent.
 
 First, within the `microservice` directory, create a new
-directory called `docker_volume` which will be used to contain
-the agents Docker container will store files within.
+directory called `docker_volume` which will be used to store files.
 
 ```bash
 cd ./microservice
 mkdir docker_volume
-cd ..
 ```
 
 Then you need to create a `.env` file in the `microservice` directory
@@ -118,14 +118,15 @@ SWE_AGENT_TIMEOUT=25
 SWE_AGENT_MODEL_NAME=gpt4
 ```
 
-Next, reactivate the conda environment using:
+Next, head from the `microservice` directory `cd` to the `anterion` directory and return to the `anterion` environment using:
 
 ```bash
-conda activate anterion
+cd ..
+conda deactivate
 ```
 
 
-Finally, run the following command to build the microservice:
+Finally, run the following command from the `anterion` directory to build the microservice:
 
 ```bash
 make build-microservice
@@ -135,14 +136,10 @@ make build-microservice
 
 ### Usage
 
-To now run Anterion, you need to be in the `anterion` environment using:
-
-```bash
-conda activate anterion
-```
+To now run Anterion, you need to be in the `anterion` environment.
 
 Then you need to run the frontend and the backend.
-Run the following command to run both together:
+Run the following command from the  `anterion` directory to run both together:
 
 ```bash
 ./run.sh
