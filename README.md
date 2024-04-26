@@ -129,6 +129,18 @@ SWE_AGENT_TIMEOUT=25
 SWE_AGENT_MODEL_NAME=gpt4
 ```
 
+**NOTE:** If you want to use an `Ollama` model, change `SWE_AGENT_MODEL_NAME` to look like the following:
+
+```bash
+SWE_AGENT_MODEL_NAME=ollama:<OLLAMA_MODEL_GOES_HERE>
+```
+
+For example, if you want to try the new LLama 3 model, use the following line:
+
+```bash
+SWE_AGENT_MODEL_NAME=ollama:llama
+```
+
 Next, head from the `microservice` directory `cd` to the `anterion` directory and return to the `anterion` environment using:
 
 ```bash
