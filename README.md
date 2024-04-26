@@ -129,7 +129,9 @@ SWE_AGENT_TIMEOUT=25
 SWE_AGENT_MODEL_NAME=gpt4
 ```
 
-**NOTE:** If you want to use an `Ollama` model, change `SWE_AGENT_MODEL_NAME` to look like the following:
+#### Ollama Support
+
+If you want to use an `Ollama` model, change `SWE_AGENT_MODEL_NAME` to look like the following:
 
 ```bash
 SWE_AGENT_MODEL_NAME=ollama:<OLLAMA_MODEL_GOES_HERE>
