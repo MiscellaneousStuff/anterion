@@ -1,4 +1,4 @@
-# **NEW** Anterion Web Beta
+# Anterion Web Beta
 
 
 <div align="center">
