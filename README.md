@@ -1,5 +1,5 @@
 # Anterion Web Beta
-
+We've recently released a new web version of Anterion that requires no setup or LLM API key to use! You can access it [here](https://beta.anterion.ai/)!: 
 
 <div align="center">
     <a href="https://www.youtube.com/watch?v=X2fm7K3sBR8"
